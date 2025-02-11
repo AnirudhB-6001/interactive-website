@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: https://github.com/AnirudhB-6001/interactive-website.git
+  repo: AnirudhB-6001/interactive-website  # Removed .git
   branch: main
 
 media_folder: "uploads"
