@@ -1,22 +1,22 @@
 [
   {
-    "title": "Interactive Website Project",
-    "description": "Developed an interactive website using React and Vite.",
-    "technologies": ["React", "Vite", "Tailwind CSS"],
-    "date": "2025-02-10",
+    "title": "Sample Test Project",
+    "description": "This is a sample project created to test and demonstrate all features available in the Projects section.",
+    "technologies": ["React", "Tailwind CSS", "Node.js", "Netlify"],
+    "date": "2025-02-12",
     "files": [
       {
-        "type": "presentation",
-        "url": "/uploads/project-presentation.pdf"
+        "type": "Presentation",
+        "url": "https://anirudhbatraofficial.com/projects/sample-presentation.pdf"
       },
       {
-        "type": "cold-email-sample",
-        "url": "/uploads/cold-email-sample.docx"
+        "type": "Cold Email Template",
+        "url": "https://anirudhbatraofficial.com/projects/sample-email-template.docx"
       }
     ],
     "gallery": [
-      "/uploads/project-preview1.png",
-      "/uploads/project-preview2.mp4"
+      "https://anirudhbatraofficial.com/projects/sample-image-1.jpg",
+      "https://anirudhbatraofficial.com/projects/sample-video-1.mp4"
     ]
   }
 ]
