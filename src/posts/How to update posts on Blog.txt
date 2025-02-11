@@ -1,0 +1,41 @@
+How to Update Posts on the Blog (JSON Version)
+Save this document for future reference in your pages or docs directory.
+
+Step 1: Open the posts.json file
+Navigate to the src/posts/ directory.
+Open the posts.json file.
+Each blog post is an entry in this JSON file.
+Example:
+
+json
+[
+  {
+    "title": "My First Blog Post",
+    "date": "2025-02-12",
+    "body": "This is the content of my first blog post."
+  },
+  {
+    "title": "My Second Blog Post",
+    "date": "2025-02-14",
+    "body": "This is the content of my second blog post."
+  }
+]
+Step 2: Add a New Blog Post
+Insert a new object inside the array in posts.json. Make sure to:
+Add a unique title.
+Specify the date in YYYY-MM-DD format.
+Provide the body content of the post.
+Example new post:
+
+json
+{
+  "title": "My Third Blog Post",
+  "date": "2025-02-20",
+  "body": "This is the content of my third blog post."
+}
+Step 3: Save and Commit Changes
+Save the posts.json file.
+Commit and push changes to Git:
+git add .
+git commit -m "Added new blog post"
+git push

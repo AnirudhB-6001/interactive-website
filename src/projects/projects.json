@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Interactive Website Project",
+    "description": "Developed an interactive website using React and Vite.",
+    "technologies": ["React", "Vite", "Tailwind CSS"],
+    "date": "2025-02-10",
+    "files": [
+      {
+        "type": "presentation",
+        "url": "/uploads/project-presentation.pdf"
+      },
+      {
+        "type": "cold-email-sample",
+        "url": "/uploads/cold-email-sample.docx"
+      }
+    ],
+    "gallery": [
+      "/uploads/project-preview1.png",
+      "/uploads/project-preview2.mp4"
+    ]
+  }
+]
