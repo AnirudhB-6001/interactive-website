@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: https://github.com/AnirudhB-6001/interactive-website.git
   branch: main
 
 media_folder: "uploads"
