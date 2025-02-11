@@ -1,0 +1,12 @@
+[
+  {
+    "title": "My First Blog Post",
+    "date": "2025-02-12",
+    "body": "This is the content of my first blog post! Stay tuned for more updates."
+  },
+  {
+    "title": "Test Blog Post 2",
+    "date": "2025-02-13",
+    "body": "Here is another test post to check if multiple posts are displaying correctly."
+  }
+]
