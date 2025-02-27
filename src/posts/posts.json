@@ -1,8 +1,33 @@
 [
   {
-    "title": "My First Blog Post",
-    "date": "2025-02-12",
-    "body": "This is the content of my first blog post! Stay tuned for more updates."
+    "title": "Documenting My Journey: Building a Cybersecurity CTF Game from Scratch",
+    "date": "2025-02-15",
+    "body": "Introduction: How It All Started:The Motivation
+
+When I first decided to explore cybersecurity, I had no idea how deep the rabbit hole went. Coming from a sales and tech background, I was used to working with tech products but had never actually built something technical myself. The idea of creating a Capture the Flag (CTF) game came from a mix of curiosity, a desire to learn, and a need to apply my newfound coding skills in a meaningful way.
+
+CTF games are used by cybersecurity professionals and learners to test their skills in hacking, cryptography, and problem-solving. I wanted to build something simple yet engaging—a game where users could solve cybersecurity challenges interactively.
+
+Phase 1: Setting the Foundations (Feb 15, 2025)
+
+Choosing the Tech Stack
+
+The first challenge was picking the right technology. Since I was already learning Flask (Python) for backend development, it made sense to use it for serving our game challenges. I decided to:
+1. Use Flask as the backend API
+2. Store challenge data within the backend itself (for now, no database)
+3. Make the game fully interactive using API endpoints
+
+This was the first time I was building a structured API from scratch, and I quickly realized that designing routes properly was crucial. I had to think about how challenges would be served, how answers would be submitted, and how the system would validate responses.
+
+Our First API Routes
+
+The first Flask API routes we implemented were:
+
+GET /api/challenge: Fetches a challenge.
+
+POST /api/submit: Submits an answer and checks if it's correct.
+
+I tested these using curl commands, and to my surprise, it worked smoothly on the first attempt!"
   },
   {
     "title": "Test Blog Post 2",
