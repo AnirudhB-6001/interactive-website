@@ -1,6 +1,6 @@
 ---
-title: "Phase 1: Setting the Foundations"
-date: "2025-02-15"
+# Heading 1 "Phase 1: Setting the Foundations"
+## Heading 2 Date: 2025-02-15"
 ---
 
 ## Choosing the Tech Stack
