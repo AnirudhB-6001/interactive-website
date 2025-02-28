@@ -1,6 +1,6 @@
 ---
-title: "Phase 2: First Challenge - Base64 Encoding"
-date: "2025-02-17"
+# "Phase 2: First Challenge - Base64 Encoding"
+Date: "2025-02-17"
 ---
 
 ## Understanding Base64
