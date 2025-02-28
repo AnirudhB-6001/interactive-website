@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-export default function Post({ post }) {
+const Post = ({ post }) => {
   return (
-    <div className="post">
-      <h2>{post.title}</h2>
-      <p><em>{post.date}</em></p>
-      <div className="post-body">
-        <p>{post.body}</p>
-      </div>
+    <div className="blog-post">
+      <h2 className="text-3xl font-bold">{post.title}</h2>
+      <p className="text-gray-500">{post.date}</p>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
     </div>
   );
-}
+};
+
+export default Post;
