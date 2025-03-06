@@ -2,7 +2,6 @@
 # "Phase 2: First Challenge - Base64 Encoding"
 Date: "2025-02-17"
 ---
-
 ## Understanding Base64
 Base64 encoding is **not encryption** but a way to convert binary data into text. It’s commonly used in steganography and data obfuscation.
 
