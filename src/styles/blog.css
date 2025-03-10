@@ -1,11 +1,9 @@
-/* ===== BLOG PAGE ===== */
 .blog-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 3rem;
-  background-color: #f4f4f4; /* ✅ Light background for better contrast */
-  min-height: 100vh;
+  gap: 20px;
+  padding: 40px;
+  background-color: #f9f9f9; /* Light background for better readability */
 }
 
 @media (min-width: 768px) {
@@ -16,103 +14,50 @@
 
 .blog-content {
   flex: 3;
-}
-
-/* ====== PROJECT SECTION ====== */
-.blog-project {
-  background: #ffffff;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* ✅ Card shadow effect */
-}
-
-.blog-project h2 {
-  cursor: pointer;
-  font-size: 1.6rem;
-  font-weight: bold;
-  padding: 10px 15px;
+  background: white;
+  padding: 20px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.blog-project h2:hover {
-  background: #007bff;
-  color: white;
-}
-
-/* ===== BLOG POST CARDS ===== */
-.blog-post {
-  background: #ffffff;
-  padding: 1.5rem;
-  margin-top: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.blog-post:hover {
-  transform: scale(1.02); /* ✅ Slight hover effect */
-}
-
-.blog-post h3 {
-  color: #222;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.blog-post p {
-  color: #555;
-  line-height: 1.5;
-}
-
-/* ====== READ MORE BUTTON ====== */
-.read-more {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 15px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-  background: #007bff;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.read-more:hover {
-  background: #0056b3;
-}
-
-/* ===== SIDEBAR ===== */
+/* Sidebar */
 .blog-sidebar {
   flex: 1;
   background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .blog-sidebar h3 {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 }
 
-.blog-sidebar ul {
-  list-style-type: none;
-  padding: 0;
+/* Project Titles (Collapsible Sections) */
+h2 {
+  cursor: pointer;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background 0.3s ease;
 }
 
-.blog-sidebar li {
-  margin-bottom: 0.75rem;
+h2:hover {
+  background: #0056b3;
 }
 
-.blog-sidebar a {
+/* Blog Posts */
+.blog-content h3 {
   color: #007bff;
-  font-weight: 600;
-  text-decoration: none;
+  font-size: 1.2rem;
+  margin-top: 10px;
 }
 
-.blog-sidebar a:hover {
-  text-decoration: underline;
+.blog-content p {
+  color: #555;
+  line-height: 1.6;
 }

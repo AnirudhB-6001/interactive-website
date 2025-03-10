@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import "../styles/blog.css"; // ✅ Import the new styles
+import "../styles/blog.css";
 
-// Function to fetch all Markdown files dynamically
 const fetchMarkdownFiles = async () => {
   try {
     const response = await fetch("/posts/index.json");
@@ -27,19 +26,12 @@ const Blog = () => {
         postEntries.map(async ({ file, project }) => {
           const response = await fetch(`/posts/${file}`);
           const text = await response.text();
-          return { 
-            file, 
-            content: text, 
-            date: file.split("-").slice(0, 3).join("-"), 
-            project 
-          };
+          return { file, content: text, date: file.split("-").slice(0, 3).join("-"), project };
         })
       );
 
-      // Sort posts by date (newest first)
       fetchedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      // Group by project
       const grouped = fetchedPosts.reduce((acc, post) => {
         if (!acc[post.project]) acc[post.project] = [];
         acc[post.project].push(post);
@@ -54,29 +46,23 @@ const Blog = () => {
 
   return (
     <div className="blog-container">
-      {/* Main Blog Content */}
+      {/* Blog Content */}
       <div className="blog-content">
-        <h1 className="text-4xl font-bold mb-6">Blog</h1>
+        <h1 className="text-4xl font-bold mb-6">📖 Blog</h1>
         {Object.keys(postsByProject).length > 0 ? (
           Object.keys(postsByProject).map((project, index) => (
-            <div key={index} className="blog-project">
-              {/* Project Title (Clickable to Expand/Collapse) */}
-              <h2
-                onClick={() =>
-                  setExpandedProject(expandedProject === project ? null : project)
-                }
-              >
-                {expandedProject === project ? "🔽" : "▶"} {project}
+            <div key={index} className="mb-6">
+              <h2 onClick={() => setExpandedProject(expandedProject === project ? null : project)}>
+                {project} {expandedProject === project ? "🔽" : "▶"}
               </h2>
 
-              {/* Blog Posts Under This Project */}
               {expandedProject === project &&
                 postsByProject[project].map((post, idx) => (
                   <div key={idx} className="blog-post">
                     <h3>{post.file.replace(/-/g, " ").replace(".md", "")}</h3>
-                    <p className="text-gray-500 text-sm">📅 {post.date}</p>
-                    <p>{post.content.split(" ").slice(0, 30).join(" ")}...</p>
-                    <Link to={`/blog/${post.file}`} className="read-more">
+                    <p className="text-gray-600 text-sm">📅 {post.date}</p>
+                    <p className="mt-2">{post.content.split(" ").slice(0, 30).join(" ")}...</p>
+                    <Link to={`/blog/${post.file}`} className="text-blue-500 underline">
                       Read More →
                     </Link>
                   </div>
@@ -88,7 +74,7 @@ const Blog = () => {
         )}
       </div>
 
-      {/* Sidebar with Recent Posts */}
+      {/* Sidebar */}
       <div className="blog-sidebar">
         <h3>Recent Posts</h3>
         <ul>
@@ -97,7 +83,7 @@ const Blog = () => {
             .slice(0, 5)
             .map((post, index) => (
               <li key={index}>
-                <Link to={`/blog/${post.file}`}>
+                <Link to={`/blog/${post.file}`} className="text-blue-500 hover:underline">
                   {post.file.replace(/-/g, " ").replace(".md", "")}
                 </Link>
               </li>

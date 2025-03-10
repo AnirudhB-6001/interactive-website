@@ -1,87 +1,41 @@
-import { useState, useEffect } from "react";
+import React from "react";
+import "../styles/projects.css";
 
-export default function Projects() {
-  const [projects, setProjects] = useState([]);
+const projects = [
+  {
+    name: "🗺️ Map Bot",
+    description: "AI-powered bot for generating economic & financial data maps.",
+    link: "/blog/2025-02-12-map-bot-intro.md"
+  },
+  {
+    name: "📊 Sales Forecasting Tool",
+    description: "Predictive analytics tool for sales managers.",
+    link: "/blog/2025-03-01-interactive-website-vision.md"
+  },
+  {
+    name: "🔐 CTF Cybersecurity Game",
+    description: "An interactive Capture-the-Flag game to learn cybersecurity.",
+    link: "/blog/2025-02-15-setting-the-foundations.md"
+  }
+];
 
-  // Fetch projects.json data
-  useEffect(() => {
-    fetch("/projects/projects.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch projects data");
-        }
-        return response.json();
-      })
-      .then((data) => setProjects(data))
-      .catch((error) => console.error("Error fetching projects data:", error));
-  }, []);
-
+const Projects = () => {
   return (
-    <div className="p-6">
-      <h1 className="text-4xl font-bold mb-4 text-center">Projects</h1>
-      {projects.length === 0 ? (
-        <p className="text-lg text-center">No projects available.</p>
-      ) : (
-        <div className="space-y-6">
-          {projects.map((project, index) => (
-            <div key={index} className="p-4 border rounded shadow">
-              <h2 className="text-2xl font-bold mb-2">{project.title}</h2>
-              <p className="mb-2">{project.description}</p>
-              <p className="mb-2 text-sm font-semibold">
-                Technologies: {project.technologies.join(", ")}
-              </p>
-              <p className="text-sm text-gray-600 mb-4">
-                Completed on: {new Date(project.date).toLocaleDateString()}
-              </p>
-
-              {project.files.length > 0 && (
-                <div className="mb-4">
-                  <h3 className="text-lg font-bold">Files:</h3>
-                  <ul className="list-disc list-inside">
-                    {project.files.map((file, fileIndex) => (
-                      <li key={fileIndex}>
-                        <a
-                          href={file.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline"
-                        >
-                          {file.type}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {project.gallery.length > 0 && (
-                <div>
-                  <h3 className="text-lg font-bold mb-2">Gallery:</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {project.gallery.map((item, itemIndex) => (
-                      <div key={itemIndex}>
-                        {item.endsWith(".mp4") ? (
-                          <video
-                            controls
-                            className="w-full rounded"
-                            src={item}
-                          ></video>
-                        ) : (
-                          <img
-                            className="w-full rounded"
-                            src={item}
-                            alt={`Project gallery item ${itemIndex + 1}`}
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="projects-container">
+      <h1>📂 Projects</h1>
+      <div className="project-grid">
+        {projects.map((project, index) => (
+          <div key={index} className="project-card">
+            <h3>{project.name}</h3>
+            <p>{project.description}</p>
+            <a href={project.link} className="text-blue-500 hover:underline">
+              Learn More →
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
+
+export default Projects;
