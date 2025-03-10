@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../styles/home.css"; // Ensure this path matches your project structure
+import "../styles/home.css";
 
 const Home = () => {
+  const [resumeData, setResumeData] = useState(null);
+
+  useEffect(() => {
+    fetch("/data/resumeData.json")
+      .then(response => response.json())
+      .then(data => setResumeData(data))
+      .catch(error => console.error("Error loading resume data:", error));
+  }, []);
+
+  if (!resumeData) return <div>Loading...</div>;
+
   return (
     <div className="home-container">
       
@@ -20,15 +31,11 @@ const Home = () => {
       <section className="resume-section">
         <h2>📌 My Career Journey</h2>
         <div className="timeline">
-          <div className="timeline-item">
-            <span className="year">2025</span> - Started building my first <strong>MicroSaaS</strong> project.
-          </div>
-          <div className="timeline-item">
-            <span className="year">2024</span> - Pivoted from Sales to Tech, learning React, Flask & AI tools.
-          </div>
-          <div className="timeline-item">
-            <span className="year">2018-2024</span> - Global GTM Strategies, Sales & Marketing for Emerging Tech.
-          </div>
+          {resumeData.careerTimeline.map((entry, index) => (
+            <div key={index} className="timeline-item">
+              <span className="year">{entry.year}</span> - {entry.description}
+            </div>
+          ))}
         </div>
       </section>
 
@@ -36,21 +43,13 @@ const Home = () => {
       <section className="projects-section">
         <h2>🚀 Featured Projects</h2>
         <div className="projects-grid">
-          <div className="project-card">
-            <h3>Sales Forecasting Tool</h3>
-            <p>An AI-driven MicroSaaS that helps sales managers predict revenue.</p>
-            <Link to="/blog">Read More</Link>
-          </div>
-          <div className="project-card">
-            <h3>Map Bot</h3>
-            <p>Interactive AI-powered bot providing economic insights & visual maps.</p>
-            <Link to="/blog">Read More</Link>
-          </div>
-          <div className="project-card">
-            <h3>CTF Game</h3>
-            <p>A cybersecurity learning game with hacking challenges.</p>
-            <Link to="/blog">Read More</Link>
-          </div>
+          {resumeData.featuredProjects.map((project, index) => (
+            <div key={index} className="project-card">
+              <h3>{project.name}</h3>
+              <p>{project.description}</p>
+              <Link to={project.link}>Read More</Link>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -58,9 +57,9 @@ const Home = () => {
       <section className="contact-section">
         <h2>📩 Let's Connect</h2>
         <div className="social-links">
-          <a href="https://www.linkedin.com/in/anirudh-batra-bd" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://github.com/AnirudhB-6001" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="mailto:contact@anirudhbatraofficial.com">Email</a>
+          <a href={resumeData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href={resumeData.socialLinks.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={resumeData.socialLinks.email}>Email</a>
         </div>
       </section>
 

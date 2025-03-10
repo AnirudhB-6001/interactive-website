@@ -1,0 +1,38 @@
+{
+    "careerTimeline": [
+      {
+        "year": "2025",
+        "description": "Started building my first MicroSaaS project."
+      },
+      {
+        "year": "2024",
+        "description": "Pivoted from Sales to Tech, learning React, Flask & AI tools."
+      },
+      {
+        "year": "2018-2024",
+        "description": "Global GTM Strategies, Sales & Marketing for Emerging Tech."
+      }
+    ],
+    "featuredProjects": [
+      {
+        "name": "Sales Forecasting Tool",
+        "description": "An AI-driven MicroSaaS that helps sales managers predict revenue.",
+        "link": "/blog"
+      },
+      {
+        "name": "Map Bot",
+        "description": "Interactive AI-powered bot providing economic insights & visual maps.",
+        "link": "/blog"
+      },
+      {
+        "name": "CTF Game",
+        "description": "A cybersecurity learning game with hacking challenges.",
+        "link": "/blog"
+      }
+    ],
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/anirudh-batra-bd",
+      "github": "https://github.com/AnirudhB-6001",
+      "email": "mailto:contact@anirudhbatraofficial.com"
+    }
+  }  
