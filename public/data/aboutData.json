@@ -1,0 +1,36 @@
+{
+    "bio": "I'm Anirudh Batra, a sales strategist turned tech builder. With a background in global GTM strategies, I transitioned into development, focusing on AI-driven tools, automation, and SaaS solutions.",
+    
+    "skills": [
+      "Go-To-Market Strategies",
+      "Sales Automation",
+      "International Business Development",
+      "React & Frontend Development",
+      "Flask & Backend APIs",
+      "Data Visualization & AI Tools"
+    ],
+    
+    "careerHighlights": [
+      {
+        "year": "2025",
+        "title": "Built My First MicroSaaS - A Sales Forecasting Tool",
+        "description": "Developed a full-stack AI-powered forecasting tool from scratch."
+      },
+      {
+        "year": "2024",
+        "title": "Transitioned from Sales to Development",
+        "description": "Started coding, built AI bots & web apps, and documented my journey."
+      },
+      {
+        "year": "2018-2024",
+        "title": "Global GTM & Emerging Tech Sales",
+        "description": "Led international sales & business expansion for cutting-edge tech companies."
+      }
+    ],
+  
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/anirudh-batra-bd",
+      "github": "https://github.com/AnirudhB-6001",
+      "email": "mailto:contact@anirudhbatraofficial.com"
+    }
+  }  

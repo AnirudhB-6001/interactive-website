@@ -1,0 +1,86 @@
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Intro Section */
+.about-intro {
+    margin-bottom: 30px;
+}
+
+.about-intro h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+}
+
+.about-intro p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Skills Section */
+.skills-section {
+    margin-top: 40px;
+}
+
+.skills-section h2 {
+    color: #007bff;
+}
+
+.skills-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.skills-section li {
+    display: inline-block;
+    background: #f8f9fa;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+/* Career Timeline */
+.career-timeline {
+    margin-top: 50px;
+    text-align: left;
+}
+
+.timeline {
+    border-left: 4px solid #007bff;
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.timeline-item {
+    background: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.timeline-item .year {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Social Links */
+.contact-section {
+    margin-top: 50px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #007bff;
+    transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #0056b3;
+}
