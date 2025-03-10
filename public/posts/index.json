@@ -1,19 +1,16 @@
 [
-  "2025-02-12-map-bot-intro.md",
-  "2025-02-12-map-bot-milestone-1.md",
-  "2025-02-13-map-bot-milestone-2.md",
-  "2025-02-16-map-bot-final.md",
-  "2025-02-15-setting-the-foundations.md",
-  "2025-02-17-first-challenge-base64.md",
-  "2025-02-19-caesar-cipher-challenge.md",
-  "2025-02-20-debugging-roadblocks.md",
-  "2025-02-22-our-game-works.md",
-  "2025-02-24-whats-next.md",
-  "2025-03-01-interactive-website-vision.md",
-  "2025-03-02-interactive-website-rebuild.md",
-  "2025-03-03-interactive-website-blog-system.md",
-  "2025-03-04-interactive-website-projects.md",
-  "2025-03-05-interactive-website-git-disaster.md",
-  "2025-03-06-interactive-website-debugging.md",
-  "2025-03-07-interactive-website-finalizing.md"
+  { "file": "2025-02-12-map-bot-intro.md", "project": "Map Bot" },
+  { "file": "2025-02-12-map-bot-milestone-1.md", "project": "Map Bot" },
+  { "file": "2025-02-13-map-bot-milestone-2.md", "project": "Map Bot" },
+  { "file": "2025-02-16-map-bot-final.md", "project": "Map Bot" },
+
+  { "file": "2025-02-15-setting-the-foundations.md", "project": "Interactive Website" },
+  { "file": "2025-02-17-first-challenge-base64.md", "project": "Interactive Website" },
+  { "file": "2025-02-19-caesar-cipher-challenge.md", "project": "Interactive Website" },
+  { "file": "2025-02-20-debugging-roadblocks.md", "project": "Interactive Website" },
+  { "file": "2025-02-22-our-game-works.md", "project": "Interactive Website" },
+  { "file": "2025-02-24-whats-next.md", "project": "Interactive Website" },
+
+  { "file": "2025-01-10-ctf-game-intro.md", "project": "CTF Game" },
+  { "file": "2025-01-15-ctf-game-authentication.md", "project": "CTF Game" }
 ]

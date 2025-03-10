@@ -13,7 +13,7 @@ export default function App() {
         <Route path="/" element={<div className="p-6 text-center"><h1 className="text-4xl">Welcome to My Website</h1></div>} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:postId" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>

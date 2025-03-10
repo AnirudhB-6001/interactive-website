@@ -1,3 +1,4 @@
+/* Blog Section */
 .blog-container {
     display: flex;
     flex-direction: column;
@@ -13,6 +14,7 @@
     flex: 3;
   }
   
+  /* Sidebar */
   .blog-sidebar {
     flex: 1;
     background: #f8f9fa;
@@ -26,27 +28,23 @@
     font-weight: bold;
   }
   
-  .blog-sidebar ul {
-    list-style-type: none;
-    padding: 0;
+  /* Collapsible Project Sections */
+  h2 {
+    cursor: pointer;
+    transition: background 0.3s ease;
   }
   
-  .blog-sidebar li {
-    margin-bottom: 10px;
+  h2:hover {
+    background: #e2e8f0;
   }
   
-  .blog-sidebar a {
+  /* Blog Posts */
+  .blog-content h3 {
     color: #007bff;
-    text-decoration: none;
+    margin-top: 10px;
   }
   
-  .blog-sidebar a:hover {
-    text-decoration: underline;
+  .blog-content p {
+    color: #555;
   }
   
-  .blog-navigation {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-  }  
