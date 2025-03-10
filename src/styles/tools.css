@@ -1,0 +1,34 @@
+.tools-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.tool-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+}
+
+.tool-card:hover {
+    transform: scale(1.05);
+}
+
+.tool-card h3 {
+    color: #007bff;
+    font-size: 1.5rem;
+}
+
+.tool-card p {
+    color: #555;
+}

@@ -1,0 +1,32 @@
+[
+    {
+      "name": "Map Bot",
+      "description": "AI-powered bot for generating economic & financial data maps.",
+      "link": "/blog/2025-02-12-map-bot-intro.md"
+    },
+    {
+      "name": "Sales Forecasting Tool",
+      "description": "Predictive analytics tool for sales managers.",
+      "link": "/blog/2025-03-01-interactive-website-vision.md"
+    },
+    {
+      "name": "CTF Cybersecurity Game",
+      "description": "An interactive Capture-the-Flag game to learn cybersecurity.",
+      "link": "/blog/2025-02-15-setting-the-foundations.md"
+    },
+    {
+      "name": "Netlify",
+      "description": "The hosting service I use for deploying my website.",
+      "link": "https://www.netlify.com/"
+    },
+    {
+      "name": "React",
+      "description": "JavaScript library used to build this website.",
+      "link": "https://reactjs.org/"
+    },
+    {
+      "name": "GitHub",
+      "description": "Version control for all my projects.",
+      "link": "https://github.com/"
+    }
+  ]  

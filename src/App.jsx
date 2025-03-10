@@ -4,6 +4,7 @@ import Home from './pages/Home';  // New Home Page
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Blog from './pages/Blog';  
+import Tools from './pages/Tools';  // Added Tools Page
 import Contact from './pages/Contact';
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/blog" element={<Blog />} />  
         <Route path="/blog/:postId" element={<Blog />} />  
+        <Route path="/tools" element={<Tools />} />  {/* Added Tools Route */}
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
