@@ -1,70 +1,69 @@
 import React from "react";
-import "../styles/home.css";
 import { Link } from "react-router-dom";
+import "../styles/home.css"; // Ensure this path matches your project structure
 
 const Home = () => {
   return (
     <div className="home-container">
+      
       {/* Hero Section */}
-      <div className="hero">
+      <section className="hero">
         <h1>Hi, I'm <span className="highlight">Anirudh Batra</span></h1>
-        <p>Sales Strategist | Emerging Tech | MicroSaaS Builder</p>
+        <p>Tech-Savvy Sales & GTM Specialist | SaaS | AI & Emerging Tech</p>
         <div className="cta-buttons">
-          <Link to="/projects" className="btn primary">View My Projects</Link>
-          <Link to="/blog" className="btn secondary">Read My Blog</Link>
+          <a href="/about" className="btn primary">About Me</a>
+          <a href="/projects" className="btn secondary">My Projects</a>
         </div>
-      </div>
+      </section>
 
-      {/* Interactive Resume Section */}
-      <div className="resume-section">
-        <h2>My Career Journey</h2>
+      {/* Resume Timeline Section */}
+      <section className="resume-section">
+        <h2>📌 My Career Journey</h2>
         <div className="timeline">
           <div className="timeline-item">
-            <span className="year">2024</span>
-            <p>Started learning full-stack development.</p>
+            <span className="year">2025</span> - Started building my first <strong>MicroSaaS</strong> project.
           </div>
           <div className="timeline-item">
-            <span className="year">2025</span>
-            <p>Built my first MicroSaaS project.</p>
+            <span className="year">2024</span> - Pivoted from Sales to Tech, learning React, Flask & AI tools.
           </div>
           <div className="timeline-item">
-            <span className="year">Future</span>
-            <p>Expanding into AI-driven tools.</p>
+            <span className="year">2018-2024</span> - Global GTM Strategies, Sales & Marketing for Emerging Tech.
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Featured Projects */}
-      <div className="projects-section">
-        <h2>Featured Projects</h2>
+      {/* Key Projects Section */}
+      <section className="projects-section">
+        <h2>🚀 Featured Projects</h2>
         <div className="projects-grid">
           <div className="project-card">
-            <h3>📍 Map Bot</h3>
-            <p>Interactive maps with real-time data.</p>
-            <Link to="/projects">Learn More →</Link>
+            <h3>Sales Forecasting Tool</h3>
+            <p>An AI-driven MicroSaaS that helps sales managers predict revenue.</p>
+            <Link to="/blog">Read More</Link>
           </div>
           <div className="project-card">
-            <h3>📈 Sales Forecasting Tool</h3>
-            <p>Predict sales trends with AI.</p>
-            <Link to="/projects">Try It →</Link>
+            <h3>Map Bot</h3>
+            <p>Interactive AI-powered bot providing economic insights & visual maps.</p>
+            <Link to="/blog">Read More</Link>
           </div>
           <div className="project-card">
-            <h3>🔒 CTF Cybersecurity Game</h3>
-            <p>Test your hacking skills.</p>
-            <Link to="/projects">Play Now →</Link>
+            <h3>CTF Game</h3>
+            <p>A cybersecurity learning game with hacking challenges.</p>
+            <Link to="/blog">Read More</Link>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Contact & Social */}
-      <div className="contact-section">
-        <h2>Get in Touch</h2>
-        <p>Let's connect and build something amazing.</p>
+      {/* Contact Section */}
+      <section className="contact-section">
+        <h2>📩 Let's Connect</h2>
         <div className="social-links">
-          <a href="https://github.com/AnirudhB-6001" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/anirudh-batra-bd" target="_blank">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/anirudh-batra-bd" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/AnirudhB-6001" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:contact@anirudhbatraofficial.com">Email</a>
         </div>
-      </div>
+      </section>
+
     </div>
   );
 };
