@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Home from './pages/Home';  // New Home Page
 import About from './pages/About';
 import Projects from './pages/Projects';
-import Blog from './pages/Blog';  // Blog will handle both blog list and post view
+import Blog from './pages/Blog';  
 import Contact from './pages/Contact';
 
 export default function App() {
@@ -10,11 +11,11 @@ export default function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<div className="p-6 text-center"><h1 className="text-4xl">Welcome to My Website</h1></div>} />
+        <Route path="/" element={<Home />} />  {/* Updated to use Home.jsx */}
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/blog" element={<Blog />} />  {/* Blog list */}
-        <Route path="/blog/:postId" element={<Blog />} />  {/* Individual blog post */}
+        <Route path="/blog" element={<Blog />} />  
+        <Route path="/blog/:postId" element={<Blog />} />  
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>

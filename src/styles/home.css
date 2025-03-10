@@ -1,0 +1,102 @@
+.home-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Hero Section */
+  .hero {
+    background: #007bff;
+    color: white;
+    padding: 40px 20px;
+    border-radius: 10px;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  .hero .highlight {
+    color: #ffd700;
+  }
+  
+  .cta-buttons {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .primary {
+    background: #ffd700;
+    color: black;
+    margin-right: 10px;
+  }
+  
+  .secondary {
+    background: white;
+    color: #007bff;
+    border: 2px solid #007bff;
+  }
+  
+  /* Timeline Section */
+  .resume-section {
+    margin-top: 50px;
+    text-align: left;
+  }
+  
+  .timeline {
+    border-left: 4px solid #007bff;
+    padding-left: 20px;
+  }
+  
+  .timeline-item {
+    margin-bottom: 20px;
+  }
+  
+  .year {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  /* Projects Section */
+  .projects-section {
+    margin-top: 50px;
+  }
+  
+  .projects-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .project-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: left;
+  }
+  
+  .project-card h3 {
+    margin-bottom: 10px;
+  }
+  
+  /* Contact Section */
+  .contact-section {
+    margin-top: 50px;
+  }
+  
+  .social-links a {
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #007bff;
+  }  
