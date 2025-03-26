@@ -44,7 +44,7 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- 🔍 Visitor Logger -->
+    <!-- Visitor Logger with Session ID -->
     <script>
       (function logVisitor() {
         const page = window.location.pathname;
@@ -52,10 +52,16 @@
         const userAgent = navigator.userAgent.toLowerCase();
         const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
 
+        let sessionId = localStorage.getItem("session_id");
+        if (!sessionId) {
+          sessionId = crypto.randomUUID();
+          localStorage.setItem("session_id", sessionId);
+        }
+
         fetch("https://visitor-intel-api.onrender.com/log-visit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ page, referrer, device }),
+          body: JSON.stringify({ page, referrer, device, session_id: sessionId }),
         })
         .then((res) => res.json())
         .then((data) => console.log("Visitor logged:", data))
