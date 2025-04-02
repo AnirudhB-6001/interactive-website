@@ -14,11 +14,13 @@
       let sessionId = localStorage.getItem("session_id");
       let fingerprintId = null;
 
+      // Device + Referrer cached globally
+      const referrer = document.referrer || "Direct";
+      const userAgent = navigator.userAgent.toLowerCase();
+      const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
+
       (async function logVisitor() {
         const page = window.location.pathname;
-        const referrer = document.referrer || "Direct";
-        const userAgent = navigator.userAgent.toLowerCase();
-        const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
 
         // Session ID
         if (!sessionId) {
@@ -64,12 +66,14 @@
         .catch((err) => console.error("Visitor log error:", err));
       })();
 
-      // 🆕 Global Event Logger
+      // ✅ Updated Global Event Logger with enrichment
       function logEvent(eventType, eventData = null) {
         if (!sessionId || !fingerprintId) {
           console.warn("⚠️ Session or fingerprint not ready yet.");
           return;
         }
+
+        const page = window.location.pathname;
 
         fetch("https://visitor-intel-api.onrender.com/log-event", {
           method: "POST",
@@ -78,7 +82,10 @@
             session_id: sessionId,
             fingerprint_id: fingerprintId,
             event_type: eventType,
-            event_data: eventData
+            event_data: eventData,
+            page,
+            referrer,
+            device
           }),
         })
         .then((res) => res.json())
