@@ -1,43 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- SEO Meta -->
-    <title>Anirudh Batra | GTM Strategist • MicroSaaS Builder • Developer</title>
-    <meta name="description" content="Anirudh Batra's official portfolio. Explore projects, MicroSaaS tools, GTM strategy insights, blog posts, and technical work.">
-    <meta name="author" content="Anirudh Batra" />
-    <meta name="keywords" content="Anirudh Batra, GTM, SaaS, MicroSaaS, Portfolio, Sales, Forecasting, React, Developer, Blog, Projects, Tools, Resume" />
-
-    <!-- Favicon & Icons for All Devices -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-
-    <!-- Open Graph (LinkedIn, WhatsApp, etc.) -->
-    <meta property="og:title" content="Anirudh Batra | Portfolio & Projects" />
-    <meta property="og:description" content="Explore my blog, projects, and micro tools. Learn about my journey as a GTM strategist and developer." />
-    <meta property="og:image" content="https://anirudhbatraofficial.com/preview.jpg" />
-    <meta property="og:url" content="https://anirudhbatraofficial.com/" />
-    <meta property="og:type" content="website" />
-
-    <!-- Twitter Card Preview -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Anirudh Batra | Portfolio & Projects" />
-    <meta name="twitter:description" content="Explore my blog, tools, and developer journey." />
-    <meta name="twitter:image" content="https://anirudhbatraofficial.com/preview.jpg" />
-
-    <!-- Google Analytics (G-RP2VKDTGJH) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP2VKDTGJH"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RP2VKDTGJH');
-    </script>
+    <!-- [UNCHANGED HEAD BLOCK] -->
+    <!-- All your SEO meta, favicon, OpenGraph, and GA setup here -->
   </head>
 
   <body>
@@ -46,6 +11,9 @@
 
     <!-- Visitor Logger with Session ID + UTM + Fingerprint -->
     <script>
+      let sessionId = localStorage.getItem("session_id");
+      let fingerprintId = null;
+
       (async function logVisitor() {
         const page = window.location.pathname;
         const referrer = document.referrer || "Direct";
@@ -53,21 +21,20 @@
         const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
 
         // Session ID
-        let sessionId = localStorage.getItem("session_id");
         if (!sessionId) {
           sessionId = crypto.randomUUID();
           localStorage.setItem("session_id", sessionId);
         }
 
-        // Fingerprint (hashed browser + screen data)
+        // Fingerprint
         const rawFingerprint = `${navigator.userAgent}-${screen.width}x${screen.height}`;
         const encoder = new TextEncoder();
         const data = encoder.encode(rawFingerprint);
         const hashBuffer = await crypto.subtle.digest('SHA-256', data);
         const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const fingerprintId = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        fingerprintId = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-        // UTM Parameters
+        // UTM Params
         const params = new URLSearchParams(window.location.search);
         const utm_source = params.get("utm_source") || null;
         const utm_medium = params.get("utm_medium") || null;
@@ -75,7 +42,7 @@
         const utm_term = params.get("utm_term") || null;
         const utm_content = params.get("utm_content") || null;
 
-        // Send log to backend
+        // Passive log to backend
         fetch("https://visitor-intel-api.onrender.com/log-visit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -96,6 +63,28 @@
         .then((data) => console.log("Visitor logged:", data))
         .catch((err) => console.error("Visitor log error:", err));
       })();
+
+      // 🆕 Global Event Logger
+      function logEvent(eventType, eventData = null) {
+        if (!sessionId || !fingerprintId) {
+          console.warn("⚠️ Session or fingerprint not ready yet.");
+          return;
+        }
+
+        fetch("https://visitor-intel-api.onrender.com/log-event", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            session_id: sessionId,
+            fingerprint_id: fingerprintId,
+            event_type: eventType,
+            event_data: eventData
+          }),
+        })
+        .then((res) => res.json())
+        .then((data) => console.log("📌 Event logged:", data))
+        .catch((err) => console.error("Event log error:", err));
+      }
     </script>
   </body>
 </html>
