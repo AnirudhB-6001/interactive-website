@@ -44,7 +44,7 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- Visitor Logger with Session ID -->
+    <!-- Visitor Logger with Session ID + UTM Tracking -->
     <script>
       (function logVisitor() {
         const page = window.location.pathname;
@@ -52,20 +52,40 @@
         const userAgent = navigator.userAgent.toLowerCase();
         const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
 
+        // Generate or reuse session ID
         let sessionId = localStorage.getItem("session_id");
         if (!sessionId) {
           sessionId = crypto.randomUUID();
           localStorage.setItem("session_id", sessionId);
         }
 
+        // Extract UTM parameters from URL
+        const params = new URLSearchParams(window.location.search);
+        const utm_source = params.get("utm_source") || null;
+        const utm_medium = params.get("utm_medium") || null;
+        const utm_campaign = params.get("utm_campaign") || null;
+        const utm_term = params.get("utm_term") || null;
+        const utm_content = params.get("utm_content") || null;
+
+        // Send data to backend
         fetch("https://visitor-intel-api.onrender.com/log-visit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ page, referrer, device, session_id: sessionId }),
+          body: JSON.stringify({
+            page,
+            referrer,
+            device,
+            session_id: sessionId,
+            utm_source,
+            utm_medium,
+            utm_campaign,
+            utm_term,
+            utm_content
+          }),
         })
-        .then((res) => res.json())
-        .then((data) => console.log("Visitor logged:", data))
-        .catch((err) => console.error("Visitor log error:", err));
+          .then((res) => res.json())
+          .then((data) => console.log("Visitor logged:", data))
+          .catch((err) => console.error("Visitor log error:", err));
       })();
     </script>
   </body>
