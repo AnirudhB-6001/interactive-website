@@ -10,32 +10,31 @@
     <script type="module" src="/src/main.jsx"></script>
 
     <!-- Visitor Logger with Session ID + UTM + Fingerprint -->
-    <script>
+    <script type="module">
+      import { collectFingerprint } from "./src/utils/fingerprint.js";
+    
       let sessionId = localStorage.getItem("session_id");
       let fingerprintId = null;
-
-      // Device + Referrer cached globally
+      let entropyData = null;
+    
       const referrer = document.referrer || "Direct";
       const userAgent = navigator.userAgent.toLowerCase();
       const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
-
+    
       (async function logVisitor() {
         const page = window.location.pathname;
-
+    
         // Session ID
         if (!sessionId) {
           sessionId = crypto.randomUUID();
           localStorage.setItem("session_id", sessionId);
         }
-
-        // Fingerprint
-        const rawFingerprint = `${navigator.userAgent}-${screen.width}x${screen.height}`;
-        const encoder = new TextEncoder();
-        const data = encoder.encode(rawFingerprint);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        fingerprintId = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
+    
+        // Advanced Fingerprinting
+        const { fingerprintId: fpId, entropy } = await collectFingerprint();
+        fingerprintId = fpId;
+        entropyData = entropy;
+    
         // UTM Params
         const params = new URLSearchParams(window.location.search);
         const utm_source = params.get("utm_source") || null;
@@ -43,7 +42,7 @@
         const utm_campaign = params.get("utm_campaign") || null;
         const utm_term = params.get("utm_term") || null;
         const utm_content = params.get("utm_content") || null;
-
+    
         // Passive log to backend
         fetch("https://visitor-intel-api.onrender.com/log-visit", {
           method: "POST",
@@ -54,6 +53,7 @@
             device,
             session_id: sessionId,
             fingerprint_id: fingerprintId,
+            entropy_data: entropyData,
             utm_source,
             utm_medium,
             utm_campaign,
@@ -61,20 +61,20 @@
             utm_content
           }),
         })
-        .then((res) => res.json())
-        .then((data) => console.log("Visitor logged:", data))
-        .catch((err) => console.error("Visitor log error:", err));
+          .then((res) => res.json())
+          .then((data) => console.log("Visitor logged:", data))
+          .catch((err) => console.error("Visitor log error:", err));
       })();
-
-      // ✅ Updated Global Event Logger with enrichment
-      function logEvent(eventType, eventData = null) {
+    
+      // Global Event Logger with enrichment
+      window.logEvent = function logEvent(eventType, eventData = null) {
         if (!sessionId || !fingerprintId) {
           console.warn("⚠️ Session or fingerprint not ready yet.");
           return;
         }
-
+    
         const page = window.location.pathname;
-
+    
         fetch("https://visitor-intel-api.onrender.com/log-event", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -85,13 +85,14 @@
             event_data: eventData,
             page,
             referrer,
-            device
+            device,
+            entropy_data: entropyData
           }),
         })
-        .then((res) => res.json())
-        .then((data) => console.log("📌 Event logged:", data))
-        .catch((err) => console.error("Event log error:", err));
-      }
-    </script>
+          .then((res) => res.json())
+          .then((data) => console.log("📌 Event logged:", data))
+          .catch((err) => console.error("Event log error:", err));
+      };
+    </script>    
   </body>
 </html>
