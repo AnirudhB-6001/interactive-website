@@ -44,99 +44,20 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- 🔒 Passive Logger & Event Logger -->
+    <!-- ✅ Logger Script (Modular) -->
     <script type="module">
-      import { collectFingerprint } from "./src/utils/fingerprint.js";
+      import {
+        initVisitorLog,
+        logEvent,
+        startTimeTracker
+      } from "./src/utils/logger.js";
 
-      let sessionId = localStorage.getItem("session_id");
-      let fingerprintId = null;
-      let entropyData = null;
+      // Expose logger globally
+      window.logEvent = logEvent;
 
-      const referrer = document.referrer || "Direct";
-      const userAgent = navigator.userAgent.toLowerCase();
-      const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
-
-      (async function logVisitor() {
-        const page = window.location.pathname;
-
-        // Session ID logic
-        if (!sessionId) {
-          sessionId = crypto.randomUUID();
-          localStorage.setItem("session_id", sessionId);
-        }
-
-        // Fingerprint & entropy
-        const { fingerprintId: fpId, entropy } = await collectFingerprint();
-        fingerprintId = fpId;
-        entropyData = entropy;
-
-        // UTM tracking
-        const params = new URLSearchParams(window.location.search);
-        const utm_source = params.get("utm_source") || null;
-        const utm_medium = params.get("utm_medium") || null;
-        const utm_campaign = params.get("utm_campaign") || null;
-        const utm_term = params.get("utm_term") || null;
-        const utm_content = params.get("utm_content") || null;
-
-        // Passive log
-        fetch("https://visitor-intel-api.onrender.com/log-visit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            page,
-            referrer,
-            device,
-            session_id: sessionId,
-            fingerprint_id: fingerprintId,
-            entropy_data: entropyData,
-            utm_source,
-            utm_medium,
-            utm_campaign,
-            utm_term,
-            utm_content
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log("✅ Visitor logged:", data))
-          .catch((err) => console.error("Visitor log error:", err));
-      })();
-
-      // 🧠 Global event logger (available to app)
-      window.logEvent = function logEvent(eventType, eventData = null) {
-        if (!sessionId || !fingerprintId) {
-          console.warn("⚠️ Session or fingerprint not ready yet.");
-          return;
-        }
-
-        const page = window.location.pathname;
-
-        fetch("https://visitor-intel-api.onrender.com/log-event", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: sessionId,
-            fingerprint_id: fingerprintId,
-            event_type: eventType,
-            event_data: eventData,
-            page,
-            referrer,
-            device,
-            entropy_data: entropyData,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log("📌 Event logged:", data))
-          .catch((err) => console.error("Event log error:", err));
-      };
-
-      // ⏱️ Time-on-page tracking (before unload)
-      let pageStartTime = Date.now();
-      window.addEventListener("beforeunload", () => {
-        const duration = Math.round((Date.now() - pageStartTime) / 1000);
-        if (typeof window.logEvent === "function") {
-          window.logEvent("time_on_page", { duration });
-        }
-      });
+      // Start logging and time tracking
+      initVisitorLog();
+      startTimeTracker();
     </script>
   </body>
 </html>
