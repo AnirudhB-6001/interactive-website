@@ -10,19 +10,17 @@ const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Deskto
 
 export async function initVisitorLog() {
   const page = window.location.pathname;
+  const client_timestamp = new Date().toISOString();
 
-  // Generate session ID if not present
   if (!sessionId) {
     sessionId = crypto.randomUUID();
     localStorage.setItem("session_id", sessionId);
   }
 
-  // Get fingerprint
   const { fingerprintId: fpId, entropy } = await collectFingerprint();
   fingerprintId = fpId;
   entropyData = entropy;
 
-  // UTM Params
   const params = new URLSearchParams(window.location.search);
   const utm_source = params.get("utm_source") || null;
   const utm_medium = params.get("utm_medium") || null;
@@ -30,7 +28,6 @@ export async function initVisitorLog() {
   const utm_term = params.get("utm_term") || null;
   const utm_content = params.get("utm_content") || null;
 
-  // Log visit
   await fetch("https://visitor-intel-api.onrender.com/log-visit", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -46,14 +43,17 @@ export async function initVisitorLog() {
       utm_campaign,
       utm_term,
       utm_content,
+      client_timestamp
     }),
-  }).then(res => res.json())
+  })
+    .then(res => res.json())
     .then(data => console.log("✅ Visitor logged:", data))
     .catch(err => console.error("Visitor log error:", err));
 }
 
 export function logEvent(eventType, eventData = null) {
   const page = window.location.pathname;
+  const client_timestamp = new Date().toISOString();
 
   if (!sessionId || !fingerprintId) {
     console.warn("⚠️ Session or fingerprint not ready yet.");
@@ -72,6 +72,7 @@ export function logEvent(eventType, eventData = null) {
       referrer,
       device,
       entropy_data: entropyData,
+      client_timestamp
     }),
   })
     .then(res => res.json())
