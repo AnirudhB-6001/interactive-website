@@ -3,7 +3,7 @@
 export async function collectFingerprint() {
   const entropy = {};
 
-  // Basic data
+  // ✅ Basic system info (stable across sessions)
   entropy.userAgent = navigator.userAgent;
   entropy.screen = `${screen.width}x${screen.height}`;
   entropy.colorDepth = screen.colorDepth;
@@ -12,10 +12,11 @@ export async function collectFingerprint() {
   entropy.platform = navigator.platform;
   entropy.deviceMemory = navigator.deviceMemory || 'unknown';
   entropy.hardwareConcurrency = navigator.hardwareConcurrency || 'unknown';
-  entropy.plugins = [...navigator.plugins].map(p => p.name).join(', ') || 'none';
-  entropy.touchSupport = 'ontouchstart' in window;
 
-  // Canvas fingerprint
+  // ✅ Plugin entropy (length only for stability)
+  entropy.plugins = navigator.plugins.length;
+
+  // ✅ Canvas fingerprint (image-based)
   try {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -32,7 +33,7 @@ export async function collectFingerprint() {
     entropy.canvas = 'unavailable';
   }
 
-  // WebGL fingerprint
+  // ✅ WebGL vendor/renderer
   try {
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
@@ -44,7 +45,7 @@ export async function collectFingerprint() {
     entropy.webglRenderer = 'unavailable';
   }
 
-  // Audio fingerprint with hashing
+  // ✅ Audio fingerprint (hashed float values)
   try {
     const context = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = context.createOscillator();
@@ -56,20 +57,18 @@ export async function collectFingerprint() {
     oscillator.start(0);
     const buffer = new Float32Array(analyser.fftSize);
     analyser.getFloatFrequencyData(buffer);
+    oscillator.stop();
 
-    // Create hash of the first 10 float values
     const audioStr = buffer.slice(0, 10).join(',');
     const audioEncoded = new TextEncoder().encode(audioStr);
     const audioHashBuffer = await crypto.subtle.digest("SHA-256", audioEncoded);
     const audioHashArray = Array.from(new Uint8Array(audioHashBuffer));
     entropy.audio = audioHashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-    oscillator.stop();
   } catch (e) {
     entropy.audio = 'unavailable';
   }
 
-  // Generate fingerprint ID based on full entropy
+  // ✅ Generate fingerprint ID using SHA-256 over entire entropy object
   const encoder = new TextEncoder();
   const data = encoder.encode(JSON.stringify(entropy));
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
