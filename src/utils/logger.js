@@ -93,28 +93,13 @@ export function startTimeTracker() {
 
     const payload = {
       session_id: sessionId,
-      page,
-      exit_time: exitTime,
+      page: page,
+      exit_time: exitTime
     };
 
     const url = "https://visitor-intel-api.onrender.com/log-exit";
     const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
 
-    console.log("📤 Sending exit beacon payload:", payload);
-
-    const success = navigator.sendBeacon(url, blob);
-
-    if (!success) {
-      console.warn("⚠️ sendBeacon failed, falling back to fetch...");
-      fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        keepalive: true, // ✅ Allows fetch to survive unload
-      })
-        .then((res) => res.json())
-        .then((data) => console.log("✅ Fallback exit logged:", data))
-        .catch((err) => console.error("❌ Fallback exit log error:", err));
-    }
+    navigator.sendBeacon(url, blob);
   });
 }
