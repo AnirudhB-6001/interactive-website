@@ -44,7 +44,7 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- ✅ Logger Script (Modular) -->
+    <!-- ✅ Logger Script (Modular, Safe for Reloads and SPA Routing) -->
     <script type="module">
       import {
         initVisitorLog,
@@ -52,10 +52,10 @@
         startTimeTracker
       } from "./src/utils/logger.js";
 
-      // Expose logger globally
+      // Expose logger globally for use in buttons, events, etc.
       window.logEvent = logEvent;
 
-      // Start logging and time tracking
+      // Start passive logging and page duration tracking
       initVisitorLog();
       startTimeTracker();
     </script>
