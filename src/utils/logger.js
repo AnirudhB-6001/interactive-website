@@ -8,9 +8,13 @@ const referrer = document.referrer || "Direct";
 const userAgent = navigator.userAgent.toLowerCase();
 const device = /mobile|android|iphone|ipad/.test(userAgent) ? "Mobile" : "Desktop";
 
+let pageStartTime = null;
+let clientTimestamp = null;
+
 export async function initVisitorLog() {
   const page = window.location.pathname;
-  const client_timestamp = new Date().toISOString();
+  clientTimestamp = new Date().toISOString();
+  pageStartTime = Date.now();
 
   if (!sessionId) {
     sessionId = crypto.randomUUID();
@@ -43,7 +47,7 @@ export async function initVisitorLog() {
       utm_campaign,
       utm_term,
       utm_content,
-      client_timestamp
+      client_timestamp: clientTimestamp
     }),
   })
     .then(res => res.json())
@@ -81,11 +85,21 @@ export function logEvent(eventType, eventData = null) {
 }
 
 export function startTimeTracker() {
-  const pageStartTime = Date.now();
   window.addEventListener("beforeunload", () => {
-    const duration = Math.round((Date.now() - pageStartTime) / 1000);
-    if (typeof window.logEvent === "function") {
-      window.logEvent("time_on_page", { duration });
-    }
+    const page = window.location.pathname;
+    const exitTime = new Date().toISOString();
+
+    if (!sessionId || !clientTimestamp) return;
+
+    const payload = {
+      session_id: sessionId,
+      page: page,
+      exit_time: exitTime
+    };
+
+    const url = "https://visitor-intel-api.onrender.com/log-exit";
+    const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+
+    navigator.sendBeacon(url, blob);
   });
 }
